@@ -1,27 +1,47 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import Buttons from './Components/Buttons'
+import Profile from './Components/Profile'
+import { BrowserRouter as Router} from "react-router-dom"
 
-class App extends Component {
-  render() {
+class App extends React.Component {  
+
+  constructor() {
+      super()
+      this.state = {
+        user: {},
+        isLoggedIn: false
+      }
+  }
+
+  componentDidMount() {
+    fetch("https://polar-springs-69108.herokuapp.com/get-user")
+    //fetch("http://localhost:8080/get-user")
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        } else {
+          throw new Error('There was a problem fetching get-user')
+        }
+      })
+      .then(responseJSON => {
+        this.setState({
+          user: responseJSON,
+          isLoggedIn: true
+        })
+      }).catch( (error) => {
+        console.log(error)
+      })
+  }
+
+  render() {  
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+      <Router>
+        <div className="App">
+          <Profile user={this.state.user} isLoggedIn={this.state.isLoggedIn} />
+          <Buttons isLoggedIn={this.state.isLoggedIn} />
+        </div>
+      </Router>
+    )
   }
 }
 
