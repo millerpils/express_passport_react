@@ -74,13 +74,13 @@
   app.get('/auth/github/callback',
     passport.authenticate('github', { failureRedirect: '/' }),
     function(req, res) {
-      res.redirect('/');
+      res.redirect('/?loggedin=1');
     });
 
   app.get('/auth/google/callback', 
     passport.authenticate('google', { failureRedirect: '/login' }),
     function(req, res) {
-      res.redirect('/');
+      res.redirect('/?loggedin=1');
     });
 
   app.get('/logout', function (req, res){
