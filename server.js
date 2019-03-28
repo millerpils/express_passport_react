@@ -10,6 +10,8 @@
   const port = process.env.PORT || 8080;
   let loggedInUser = null;
 
+  console.log(port)
+
   /* LOCAL SERVER SETUP */
 
   app.use(express.static(path.join(__dirname, 'build')));
