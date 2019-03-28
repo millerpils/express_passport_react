@@ -1,8 +1,8 @@
 import React from 'react'
 import Profile from './Components/Profile'
 import { BrowserRouter as Router} from "react-router-dom"
-const herokuURL = "https://cryptic-badlands-83200.herokuapp.com/"
-//const localURL = "http://localhost:8080/get-user/"
+//const herokuURL = "https://cryptic-badlands-83200.herokuapp.com/"
+const localURL = "http://localhost:8080/get-user/"
 
 class App extends React.Component {  
 
@@ -17,7 +17,7 @@ class App extends React.Component {
   }
 
   getUserJSON() {
-    fetch(herokuURL)
+    fetch(localURL)
       .then(response => {
         if (response.ok) {
           return response.json()
